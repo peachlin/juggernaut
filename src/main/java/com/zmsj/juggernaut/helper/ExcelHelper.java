@@ -8,6 +8,7 @@ import com.zmsj.juggernaut.model.FirstEDto;
 import com.zmsj.juggernaut.model.FirstFDto;
 import com.zmsj.juggernaut.model.FirstGDto;
 import java.io.File;
+import java.text.DecimalFormat;
 import java.util.List;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -19,8 +20,8 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
  */
 public class ExcelHelper {
 
-  public static String PATH = "/root/jindu/数字平台表格.xlsx";
-//  public static String PATH = "C:\\数字平台表格.xlsx";
+  //    public static String PATH = "/root/jindu/数字平台表格.xlsx";
+  public static String PATH = "C:\\数字平台表格.xlsx";
 //  public static String PATH = "C:\\Users\\wangk\\Desktop\\数字平台表格.xlsx";
 
   public static List<FirstFDto> read1Sheet() throws Exception {
@@ -226,10 +227,12 @@ public class ExcelHelper {
       Row row = sheet.getRow(rIndex);
       if (row != null) {
         FirstGDto firstGDto = new FirstGDto();
-        firstGDto.setYear(row.getCell(0).getNumericCellValue() + "");
+        firstGDto.setYear((int) row.getCell(0).getNumericCellValue() + "");
         firstGDto.setA((int) row.getCell(1).getNumericCellValue());
         firstGDto.setB((int) row.getCell(2).getNumericCellValue());
         firstGDto.setC((int) row.getCell(3).getNumericCellValue());
+        int num = (int) (null != row.getCell(4) ? row.getCell(4).getNumericCellValue() : 0);
+        firstGDto.setD(new DecimalFormat(".00").format((num) / 10_000d) + "");
         list.add(firstGDto);
       }
     }

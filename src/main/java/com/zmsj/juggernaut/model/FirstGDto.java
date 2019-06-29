@@ -19,4 +19,6 @@ public class FirstGDto {
   private Integer b;
   @ApiModelProperty("禁毒宣传栏")
   private Integer c;
+  @ApiModelProperty("累计宣传人数")
+  private String d;
 }
